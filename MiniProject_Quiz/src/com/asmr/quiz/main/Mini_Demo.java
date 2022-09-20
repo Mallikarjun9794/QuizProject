@@ -85,9 +85,9 @@ public class Mini_Demo {
 			}
 				ps1.close();
 			
-				// calculate grade
+       // calculate grade
 			String grade; 
-			if (tmarks >= 8 && tmarks <= 10) {
+      if (tmarks >= 8 && tmarks <= 10) {
 				grade = "A";
 			} else if (tmarks < 8 && tmarks >= 6) {
 				grade = "B";
@@ -113,3 +113,124 @@ public class Mini_Demo {
 		}
 
 	}
+
+// Display all rec && Display specific record on id basis
+
+	public void get_RecordBy_Id() throws SQLException, InterruptedException {
+
+		displayRec();
+
+		ownRec_Id();
+	}
+
+	// Display all rect from db with descending score base
+	public void displayRec() throws SQLException {
+
+		String sql3 = "select id,fname,marks from studinfo order by id";
+		try {
+			System.out.println();
+			PreparedStatement ps3 = con.prepareStatement(sql3);
+
+			ResultSet query = ps3.executeQuery();
+
+			System.out.println("****** All recored inside the database:- *********");
+			System.out.println("-----------------------------------------------------------------------------");
+			System.out.println("" + "id" + "\t" + "name" + "\t" + "\t marks");
+			System.out.println("-----------------------------------------------------------------------------");
+			while (query.next()) {
+
+				System.out.print(query.getInt(1));
+				System.out.print("\t" + query.getString(2));
+				System.out.print("\t \t   " + query.getInt(3));
+				System.out.println();
+			}
+			ps3.close();
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+	}
+
+	public void ownRec_Id() throws InterruptedException  {
+		s.formating();
+		System.out.println();
+		System.out.println("Do you want to see your Record:-(y/n)");
+		char ch1 = sc.next().charAt(0);
+		System.out.println();
+		if (ch1 == 'y' || ch1 == 'Y') {
+						
+			//for valid input check 
+			
+			
+			int flag = 0;
+			int y = 0;
+			while (flag == 0) {
+				y = 0;
+				try {			
+					Scanner sc = new Scanner(System.in);
+					System.out.println("Enter your id:-");
+					int id = sc.nextInt();
+					y=id;
+					sc.close();
+				} catch (Exception e) {
+					System.out.println("Enter valid input");
+					flag = 0;
+				}
+				if(y!=0) {
+					flag=1;
+				}
+			}
+			System.out.println("Enter your id: "+ y);
+			
+			// fetching data through id
+			
+			
+			try {
+				String sql4 = "select * from studinfo where id=?";
+				PreparedStatement ps4 = con.prepareStatement(sql4);
+				ps4.setInt(1, y);
+		       
+				
+				
+				ResultSet query = ps4.executeQuery();
+
+				System.out.println("****** Your recored inside the database:- *********");
+				System.out.println("-----------------------------------------------------------------------------");
+				System.out.println("" + "id" + "\t" + "Fname" + "\t" + " Lname" + "\t" + "      Email" + "\t"
+						+ "     Marks" + "\t" + "     Grade");
+				System.out.println("-----------------------------------------------------------------------------");
+
+				while (query.next()) {
+
+					System.out.print(query.getInt(1));
+					System.out.print("\t" + query.getString(2));
+					System.out.print("\t" + query.getString(3));
+					System.out.print("       " + query.getString(4));
+					System.out.print("\t     " + query.getInt(5));
+					System.out.print("\t              " + query.getString(6));
+					System.out.println();
+					System.out.println("-----------------------------------------------------------------------------");
+					System.out.println("\n");
+
+					s.formating1();
+					System.out.print("🏁🖥️💥🙏 Thanks For Visiting Quiz 🙏💥 🖥️🏁");
+					s.formating1();
+					
+				}
+			
+			
+		}catch(Exception e) {
+			System.out.println("Invalid Input");
+			e.printStackTrace();
+		}
+
+		} else {
+		        System.out.println("...Invalid Input....");
+			System.out.println("**🏁🖥️💥🙏 Thanks For Visiting Quiz 🙏💥 🖥️🏁**");
+			
+		}
+		
+	}
+}
+
