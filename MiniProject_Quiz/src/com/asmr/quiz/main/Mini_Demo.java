@@ -1,6 +1,5 @@
 package com.asmr.quiz.main;
 
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -86,9 +85,9 @@ public class Mini_Demo {
 			}
 				ps1.close();
 			
-
-			String grade; // calculate grade
-			if (tmarks >= 8 && tmarks <= 10) {
+       // calculate grade
+			String grade; 
+      if (tmarks >= 8 && tmarks <= 10) {
 				grade = "A";
 			} else if (tmarks < 8 && tmarks >= 6) {
 				grade = "B";
@@ -115,7 +114,7 @@ public class Mini_Demo {
 
 	}
 
-	// Display all rec && Display specific record on id basis
+// Display all rec && Display specific record on id basis
 
 	public void get_RecordBy_Id() throws SQLException, InterruptedException {
 
@@ -234,3 +233,4 @@ public class Mini_Demo {
 		
 	}
 }
+
