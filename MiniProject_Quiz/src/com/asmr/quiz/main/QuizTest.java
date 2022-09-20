@@ -1,4 +1,4 @@
-package com.quiz.main;
+package com.asmr.quiz.main;
 
 public class QuizTest {
 
